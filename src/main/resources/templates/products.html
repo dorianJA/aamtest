@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products page</title>
+</head>
+<body>
+<table border="1px">
+    <form th:action="@{/products}" th:object="${newProduct}" method="get">
+        <input type="search" placeholder="Search....." name="searchProduct">
+        <button type="submit">Search</button>
+    </form>
+    <tr>
+        <td>Name of product</td>
+        <td>Description</td>
+        <th>Edit product</th>
+        <th>Delete product</th>
+    </tr>
+
+    <th:block th:each="product : ${listProduct}">
+        <tr>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.description}"></td>
+            <td><a th:href="@{/edit(id=${product.id})}">edit</a></td>
+            <td><a th:href="@{/delete(id=${product.id})}">delete</a ></td>
+        </tr>
+    </th:block>
+</table>
+<p><a th:href="@{/add}">Add product</a></p>
+
+<!--<form th:action="@{/add}" th:object="${newProduct}" method="post">-->
+<!--    <p>Name of product:     <input type="text" name="name" />-->
+<!--        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</span>-->
+<!--    </p>-->
+<!--    <p>Description:      <input type="text" name="description" /></p>-->
+<!--    <input type="submit" value="add"> <br>-->
+<!--</form>-->
+</body>
+</html>
